@@ -1,0 +1,10 @@
+'use strict';
+
+class HighLow { 
+    getHighLow(args = { pathParams: '' }) {
+        const { params, pathParams: { orgType = '' } } = args;
+        return this.request.get(`${this.apiHost}highLow/${orgType}`, { params: params });
+    }
+}
+
+module.exports = HighLow;

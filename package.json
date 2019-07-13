@@ -1,10 +1,14 @@
 {
   "name": "mlb-stats-api",
-  "version": "1.0.0",
+  "version": "1.0.8",
   "description": "Node JS Library for consuming MLB's official stats API",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/asbeane/mlb-stats-api"
   },
   "keywords": [
     "node",
@@ -16,5 +20,9 @@
   "license": "MIT",
   "dependencies": {
     "axios": "^0.19.0"
+  },
+  "devDependencies": {
+    "mocha": "^6.1.4",
+    "should": "^13.2.3"
   }
 }
