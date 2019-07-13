@@ -1,0 +1,20 @@
+{
+  "name": "mlb-stats-api",
+  "version": "1.0.0",
+  "description": "Node JS Library for consuming MLB's official stats API",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "keywords": [
+    "node",
+    "nodejs",
+    "mlb",
+    "mlb-stats-api"
+  ],
+  "author": "Andy Beane",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.19.0"
+  }
+}
