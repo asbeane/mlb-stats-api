@@ -19,7 +19,7 @@ Currently powered by Axios! This decision was made largely due to the deprecatio
 In your project import the module like so: 
 ```
 const MLBStatsAPI = require('mlb-stats-api');
-const mlbStats = new MLBStatsAPI();```
+const mlbStats = new MLBStatsAPI();
 ```
 
 Optional arguments can be passed to the constructor, which include:
@@ -76,3 +76,42 @@ const response = await mlbStats.getGame(params: { ...... }, { pathParams: { ....
      * /game/{gamePk}/playByPlay = mlbStats.getGamePlayByPlay()
      * /gamePace - mlbStats.getGamePace()
  * /highLow/{orgType} - mlbStats.getHighLow()
+ * /homeRunDerby/{gamePk} = mlbStats.getHomeRunDerby()
+ * /league - mlbStats.getLeague()
+    * /league/{leagueId}/allStarBallot - mlbStats.getLeagueAllStarBallot()
+    * /league/{leagueId}/allStarWriteIns - mlbStats.getLeagueAllStarWriteIns()
+    * /league/{leagueId}/allStarFinalVote - mlbStats.getLeagueAllStarFinalVote()
+ * /people - mlbStats.getPeople()
+    * /people/changes - mlbStats.getPeopleChanges()
+    * /people/freeAgents - mlbStats.getPeoplefreeAgents()
+    * /people/{personId} = mlb.getPerson()
+    * /people/{personId}/stats/game/{gamePk} - mlbStats.getPersonStats()
+ * /jobs - mlbStats.getJobs()
+    * /jobs/umpires - mlbStats.getJobsUmpires()
+    * /jobs/umpires/games/{umpireId} = mlbStats.getJobsUmpiresGames()
+    * /jobs/datacasters - mlbStats.getJobsDatacasters()
+    * /jobs/officialScorers - mlbStats.getJobsOfficialScorers()
+ * /schedule - mlbStats.getSchedule() 
+    * /schedule/games/tied - mlbstats.getScheduleTied() 
+    * /schedule/postseason - mlbStats.getSchedulePostseason()
+    * /schedule/postseason/series - mlbStats.getSchedulePostseasonSeries()
+    * /schedule/postseason/tuneIn - mlbStats.getSchedulePostseasonTuneIn()
+ * /seasons{all} - mlbStats.getSeasons()
+    * /seasons/{seasonId} - mlbStats.getSeason()
+ * /sports - mlbStats.getSports()
+ * /sports/{sportId}/player - mlbStats.getSportsPlayers()
+ * /standings - mlbStats.getStandings()
+ * /stats - mlbStats.getStats()
+    * /stats/leaders - mlbStats.getStatsLeaders()
+    * /stats/streaks - mlbStats.getStatsStreaks()
+ * /teams - mlbStats.getTeams()
+    * /teams/history - mlbStats.getTeamsHistory()
+    * /teams/stats - mlbStats.getTeamsStats()
+    * /teams/affiliates - mlbStats.getTeamsAffiliates()
+    * /teams/{teamId} - mlbStats.getTeam()
+    * /teams/{teamId}/alumni - mlbStats.getTeamAlumni()
+    * /teams/{teamId}/coaches - mlbStats.getTeamCoaches()
+    * /teams/{teamId}/personnel - mlbStats.getTeamPersonnel()
+    * /teams/{teamId}/leaders - mlbStats.getTeamLeaders()
+    * /teams/{teamId}/roster - mlbStats.getTeamRoster()
+ * /venues - mlbStats.getVenue()
