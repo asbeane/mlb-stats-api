@@ -1,6 +1,6 @@
 # Release Notes
 
-## v1.0.6
+## v1.0.8
 Date: 2019-07-16
 What's In this release?
 This is the first complete release! It contains the working implementation of most of tbe known
