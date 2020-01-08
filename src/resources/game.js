@@ -4,7 +4,7 @@ class Game {
     getGame(args = { pathParams: '' }) {
         // if empty object but no pathParams return error, or handle it
         const { params, pathParams: { gamePk = '' }} = args;
-        return this.request.get(`${this.apiHost}game/${gamePk}`, { params: params });
+        return this.request.get(`${this.apiHost}game/${gamePk}/feed/live`, { params: params });
     }
     
     getGameDiffPatch(args = { pathParams: '' }) {
