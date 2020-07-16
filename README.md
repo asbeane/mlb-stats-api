@@ -41,7 +41,6 @@ const response = await mlbStats.getAttendance({params: { teamId: 111, leagueId: 
 The ```params``` property represents an object describing the query parameters.
 
 Example:
-
 ```
 const response = await mlbStats.getGame({ pathParams: { gamePk: 12345 }});
 ```
