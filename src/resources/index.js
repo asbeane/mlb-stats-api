@@ -16,9 +16,9 @@ const Standings = require('./standings');
 const Sports = require('./sports');
 const Stats = require('./stats');
 const Teams = require('./teams');
-const Venue = require('./venue');
+const Venues = require('./venues');
 
 const resources = { Attendance, Awards, Conferences, Divisions, Draft, Game, HighLow, HomeRunDerby, League,
-    People, Schedule, Seasons, Sports, Standings, Stats, Teams, Venue };
+    People, Schedule, Seasons, Sports, Standings, Stats, Teams, Venues };
 
 module.exports = resources;

@@ -113,4 +113,5 @@ const response = await mlbStats.getGame(params: { ...... }, { pathParams: { ....
     * /teams/{teamId}/personnel - mlbStats.getTeamPersonnel()
     * /teams/{teamId}/leaders - mlbStats.getTeamLeaders()
     * /teams/{teamId}/roster - mlbStats.getTeamRoster()
- * /venues - mlbStats.getVenue()
+ * /venues - mlbStats.getVenues()
+    * /venues/{venueId} - mlbStats.getVenue()
