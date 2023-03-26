@@ -1,6 +1,6 @@
 {
   "name": "mlb-stats-api",
-  "version": "1.9.0",
+  "version": "1.10.0",
   "description": "Node JS Library for consuming MLB's official stats API",
   "main": "index.js",
   "scripts": {
