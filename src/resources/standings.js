@@ -3,7 +3,7 @@
 class Standings {
     getStandings(args = {}) {
         const { params } = args;
-        return this.request.get(`${this.apiHost}standings`, { params: params });
+        return fetch(`${this.apiHost}standings`, { params: params });
     }
 }
 

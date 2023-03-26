@@ -3,7 +3,7 @@
 class Divisions {
     getDivisions(args = {}) {
         const { params } = args;
-        return this.request.get(`${this.apiHost}divisions`, { params: params });
+        return fetch(`${this.apiHost}divisions`, { params: params });
     }
 }
 

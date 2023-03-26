@@ -1,11 +1,9 @@
 'use strict';
 const resources = require('./src/resources');
-const axios = require('axios');
 
 class MLBStatsAPI {
     constructor(host = 'https://statsapi.mlb.com/api/') {
-        this.host = host;        
-        this.request = axios;
+        this.host = host;
         this.apiHost = host + 'v1/';
 
         /* All functions assume first argument are the query parameters named params, and the second argument is an object containing

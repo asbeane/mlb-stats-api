@@ -127,19 +127,4 @@ describe('MLBStatsAPI', () => {
         const response = await mlbStats.getLeague({ params: { sportid: 1, leagueIds: 103 } });
         should(response.status).be.exactly(200);
     });
-<<<<<<< HEAD
-=======
-
-    it('Should Get all Venues with a 200 Status', async () => {
-        const response = await mlbStats.getVenues();
-        should(response.status).be.exactly(200);
-    });
-
-    it('Should Get a single Venue with a 200 Status', async () => {
-        const response = await mlbStats.getVenue({ pathParams: { venueId: 1 } });
-        const venue = response.data.venues[0]
-        should(venue.id).be.exactly(1);
-        should(response.status).be.exactly(200);
-    });
->>>>>>> fd694b8cc32b82ba6fa8b9e024954ac4b85cb60b
 })

@@ -3,7 +3,7 @@
 class Conferences {
     getConferences(args = {}) {
         const { params } = args;
-        return this.request.get(`${this.apiHost}conferences`, { params: params });
+        return fetch(`${this.apiHost}conferences`, { params: params });
     }
 }
 

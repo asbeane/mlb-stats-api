@@ -3,7 +3,7 @@
 class Attendance {
     getAttendance(args = {}) {
         const { params } = args;
-        return this.request.get(`${this.apiHost}attendance`, { params: params });
+        return fetch(`${this.apiHost}attendance`, { params: params });
     }
 }
 
