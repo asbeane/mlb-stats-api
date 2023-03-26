@@ -23,7 +23,7 @@ class People {
 
     getPersonStats(args = { pathParams: '' }) {
         const { params, pathParams: { gamePk = '', personId = '' } } = args;
-        return fetch(`${this.apiHost}people/${personId}/stats/${gamePk}`, { params: params });
+        return fetch(`${this.apiHost}people/${personId}/stats/game/${gamePk}`, { params: params });
     }
 }
 
