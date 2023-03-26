@@ -10,10 +10,6 @@ Node.js Library for calling the MLB Stats API
 
 ``` npm install mlb-stats-api --save ```
 
-## Dependencies
-
-Currently powered by Axios! This decision was made largely due to the deprecation of the popular request library, and because axios is a well supported library for making HTTP requests using promises.
-
 ## How to use
 
 In your project import the module like so: 
@@ -24,7 +20,6 @@ const mlbStats = new MLBStatsAPI();
 
 Optional arguments can be passed to the constructor, which include:
 * host - defaults to the mlb-stats-api production host
-* version - defaults to v1, the current live version of the API
 
 ## Making requests
 

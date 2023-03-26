@@ -7,5 +7,4 @@ class Conferences {
     }
 }
 
-
 module.exports = Conferences;
