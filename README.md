@@ -37,7 +37,7 @@ The ```params``` property represents an object describing the query parameters.
 
 Example:
 ```
-const response = await mlbStats.getGame({ pathParams: { gamePk: 12345 }});
+const response = await mlbStats.getGameFeed({ pathParams: { gamePk: 12345 }});
 ```
 
 The ```pathParams``` property represents an object describing the name path parameters.
@@ -45,7 +45,7 @@ The ```pathParams``` property represents an object describing the name path para
 Both the pathParams and params can be passed in the object passed to any given request (where applicable to the specific request).
 
 ```
-const response = await mlbStats.getGame(params: { ...... }, { pathParams: { ...... }});
+const response = await mlbStats.getGameFeed(params: { ...... }, { pathParams: { ...... }});
 ```
 
 ## Supported Requests and their corresponding functions:
@@ -55,7 +55,7 @@ const response = await mlbStats.getGame(params: { ...... }, { pathParams: { ....
  * /divisions - mlbStats.getDivisions()
  * /draft - mlbStats.getDraft()
  * /game 
-     * /game/{gamePk}/feed/live - mlbStats.getGame()
+     * /game/{gamePk}/feed/live - mlbStats.getGameFeed()
      * /game/{gamePk}/feed/live/diffPatch -  mlbStats.getGameDiffPatch()
      * /game/{gamePk}/feed/live/timestamps - mlbStats.getGameTimestamps()
      * /game/changes - mlbStats.getGameChanges()

@@ -35,12 +35,9 @@ describe('MLBStatsAPI', () => {
         should(response.status).be.exactly(200);
     });
 
-    it('Should Fail to Get Single Game Data with a 405 Status', async () => {
-        try {
-            await mlbStats.getGame({ pathParams: { gamePk: 12345 } });
-        } catch (err) {
-            should(err.response.status).be.exactly(405);
-        }
+    it('Should Get Single Game Feed with 200 Status', async () => {
+        const response = await mlbStats.getGameFeed({ pathParams: { gamePk: 534196 } });
+        should(response.status).be.exactly(200);
     });
 
     it('Should Get Single Game Diff Patch Data with a 200 Status', async () => {

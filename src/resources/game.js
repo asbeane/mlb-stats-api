@@ -1,12 +1,6 @@
 'use strict';
 
 class Game {
-    getGame(args = { pathParams: '' }) {
-        // if empty object but no pathParams return error, or handle it
-        const { params, pathParams: { gamePk = '' } } = args;
-        return fetch(`${this.host}v1/game/${gamePk}`, { params: params });
-    }
-
     getGameFeed(args = { pathParams: '' }) {
         const { params, pathParams: { gamePk = '' } } = args;
         return fetch(`${this.host}v1.1/game/${gamePk}/feed/live`, { params: params });
