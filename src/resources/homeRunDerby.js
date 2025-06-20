@@ -1,9 +1,10 @@
 'use strict';
+const HttpClient = require('../httpClient');
 
 class HomeRunDerby {
     getHomeRunDerby(args = { pathParams: '' }) {
         const { params, pathParams: { gamePk = '', bracket = '', pool = '' } } = args;
-        return fetch(`${this.apiHost}homeRunDerby/${gamePk}/${bracket}/${pool}`, { params: params });
+        return HttpClient.request(`${this.apiHost}homeRunDerby/${gamePk}/${bracket}/${pool}`, { params: params });
     }
 }
 

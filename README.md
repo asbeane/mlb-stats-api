@@ -6,107 +6,341 @@ Node.js Library for calling the MLB Stats API
 [![npm](https://img.shields.io/npm/v/mlb-stats-api.svg)](https://www.npmjs.com/package/mlb-stats-api)
 [![License](https://img.shields.io/github/license/asbeane/mlb-stats-api.svg)](https://www.npmjs.com/package/mlb-stats-api)
 
+## Features
+
+- ✅ **Complete MLB Stats API coverage** - Access all endpoints of the official MLB Stats API
+- ✅ **TypeScript support** - Full type definitions included for better development experience
+- ✅ **Modern Node.js** - Built for Node.js 18+ with native ES6+ features
+- ✅ **Zero dependencies** - Lightweight with no external runtime dependencies
+- ✅ **Promise-based** - Modern async/await support
+- ✅ **Well tested** - Comprehensive test suite covering all endpoints
+
 ## Install
 
-``` npm install mlb-stats-api --save ```
-
-## How to use
-
-In your project import the module like so: 
+```bash
+npm install mlb-stats-api --save
 ```
+
+## Quick Start
+
+### JavaScript (CommonJS)
+
+```javascript
 const MLBStatsAPI = require('mlb-stats-api');
 const mlbStats = new MLBStatsAPI();
+
+async function getGameData() {
+    try {
+        // Get current teams
+        const teams = await mlbStats.getTeams({ params: { sportId: 1 } });
+        console.log(teams.data.teams);
+        
+        // Get today's games
+        const schedule = await mlbStats.getSchedule({ 
+            params: { 
+                sportId: 1, 
+                date: new Date().toISOString().split('T')[0] 
+            } 
+        });
+        console.log(schedule.data.dates);
+        
+        // Get live game feed (if game is in progress)
+        const gameFeed = await mlbStats.getGameFeed({ 
+            pathParams: { gamePk: 634197 } 
+        });
+        console.log(gameFeed.data);
+    } catch (error) {
+        console.error('Error fetching MLB data:', error.message);
+    }
+}
+
+getGameData();
 ```
 
-Optional arguments can be passed to the constructor, which include:
-* host - defaults to the mlb-stats-api production host
+### TypeScript
 
-## Making requests
+```typescript
+import MLBStatsAPI from 'mlb-stats-api';
+import type { TeamsResponse, ScheduleResponse, GameFeedResponse } from 'mlb-stats-api/types';
 
-Each callable function takes a single argument, which is an object.
-The object can have one or two top level properties, which is how the query parameters, and the path parameters
-are passed to the library.
+const mlbStats = new MLBStatsAPI();
 
-Example:
-
+async function getTypedGameData(): Promise<void> {
+    try {
+        // TypeScript provides full intellisense and type checking
+        const teams = await mlbStats.getTeams({ params: { sportId: 1 } });
+        const teamsData: TeamsResponse = teams.data;
+        
+        const schedule = await mlbStats.getSchedule({ 
+            params: { 
+                sportId: 1, 
+                date: '2024-07-01' 
+            } 
+        });
+        const scheduleData: ScheduleResponse = schedule.data;
+        
+        const gameFeed = await mlbStats.getGameFeed({ 
+            pathParams: { gamePk: 634197 } 
+        });
+        const gameData: GameFeedResponse = gameFeed.data;
+        
+        console.log(`Found ${teamsData.teams.length} teams`);
+        console.log(`Found ${scheduleData.totalGames} games`);
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
 ```
-const response = await mlbStats.getAttendance({params: { teamId: 111, leagueId: 103, leagueListid: 103 }});
+
+## Constructor Options
+
+```javascript
+// Use default MLB Stats API host
+const mlbStats = new MLBStatsAPI();
+
+// Use custom host (for testing or alternative endpoints)
+const mlbStats = new MLBStatsAPI('https://custom-api.example.com/api/');
 ```
 
-The ```params``` property represents an object describing the query parameters.
+## Making Requests
 
-Example:
+Each method accepts an options object with the following properties:
+
+- **`params`** - Query parameters (optional)
+- **`pathParams`** - Path parameters for endpoints that require them (like game IDs, team IDs, etc.)
+
+### Basic Usage
+
+```javascript
+// Simple request with no parameters
+const awards = await mlbStats.getAwards();
+
+// Request with query parameters
+const teams = await mlbStats.getTeams({ 
+    params: { 
+        sportId: 1, 
+        season: 2024 
+    } 
+});
+
+// Request with path parameters
+const team = await mlbStats.getTeam({ 
+    pathParams: { teamId: 111 } 
+});
+
+// Request with both path and query parameters
+const teamRoster = await mlbStats.getTeamRoster({ 
+    pathParams: { teamId: 111 },
+    params: { rosterType: 'active' }
+});
 ```
-const response = await mlbStats.getGameFeed({ pathParams: { gamePk: 12345 }});
+
+## Available Endpoints
+
+### Teams
+```javascript
+// Get all teams
+await mlbStats.getTeams({ params: { sportId: 1 } });
+
+// Get specific team
+await mlbStats.getTeam({ pathParams: { teamId: 111 } });
+
+// Get team roster
+await mlbStats.getTeamRoster({ pathParams: { teamId: 111 } });
+
+// Get team stats
+await mlbStats.getTeamsStats();
+
+// Get team history
+await mlbStats.getTeamsHistory();
 ```
 
-The ```pathParams``` property represents an object describing the name path parameters.
+### Games
+```javascript
+// Get live game feed
+await mlbStats.getGameFeed({ pathParams: { gamePk: 634197 } });
 
-Both the pathParams and params can be passed in the object passed to any given request (where applicable to the specific request).
+// Get game boxscore
+await mlbStats.getGameBoxscore({ pathParams: { gamePk: 634197 } });
 
+// Get game linescore
+await mlbStats.getGameLinescore({ pathParams: { gamePk: 634197 } });
+
+// Get play-by-play
+await mlbStats.getGamePlayByPlay({ pathParams: { gamePk: 634197 } });
 ```
-const response = await mlbStats.getGameFeed(params: { ...... }, { pathParams: { ...... }});
+
+### Schedule
+```javascript
+// Get today's games
+await mlbStats.getSchedule({ 
+    params: { 
+        sportId: 1, 
+        date: '2024-07-01' 
+    } 
+});
+
+// Get date range
+await mlbStats.getSchedule({ 
+    params: { 
+        sportId: 1, 
+        startDate: '2024-07-01',
+        endDate: '2024-07-07'
+    } 
+});
+
+// Get postseason schedule
+await mlbStats.getSchedulePostseason();
 ```
 
-## Supported Requests and their corresponding functions:
- * /attendance - mlbStats.getAttendance()
- * /awards - mlbStats.getAwards()
- * /conferences - mlbStats.getConferences()
- * /divisions - mlbStats.getDivisions()
- * /draft - mlbStats.getDraft()
- * /game 
-     * /game/{gamePk}/feed/live - mlbStats.getGameFeed()
-     * /game/{gamePk}/feed/live/diffPatch -  mlbStats.getGameDiffPatch()
-     * /game/{gamePk}/feed/live/timestamps - mlbStats.getGameTimestamps()
-     * /game/changes - mlbStats.getGameChanges()
-     * /game/{gamePk}/contextMetrics - mlbStats.getGameContextMetrics()
-     * /game/{gamePk}/winProbability - mlbStats.getGameWinProbability()
-     * /game/{gamePk}/boxscore - mlbStats.getGameBoxscore()
-     * /game/{gamePk}/content - mlbStats.getGameContent()
-     * /game/{gamePk}/feed/color - mlbStats.getGameColor()
-     * /game/{gamePk}/feed/color/diffPatch - mlbStats.getGameColorDiff()
-     * /game/{gamePk}/feed/color/timestamps - mlbStats.getGameColorTimestamps()
-     * /game/{gamePk}/linescore - mlbStats.getGameLinescore()
-     * /game/{gamePk}/playByPlay = mlbStats.getGamePlayByPlay()
-     * /gamePace - mlbStats.getGamePace()
- * /highLow/{orgType} - mlbStats.getHighLow()
- * /homeRunDerby/{gamePk} = mlbStats.getHomeRunDerby()
- * /league - mlbStats.getLeague()
-    * /league/{leagueId}/allStarBallot - mlbStats.getLeagueAllStarBallot()
-    * /league/{leagueId}/allStarWriteIns - mlbStats.getLeagueAllStarWriteIns()
-    * /league/{leagueId}/allStarFinalVote - mlbStats.getLeagueAllStarFinalVote()
- * /people - mlbStats.getPeople()
-    * /people/changes - mlbStats.getPeopleChanges()
-    * /people/freeAgents - mlbStats.getPeoplefreeAgents()
-    * /people/{personId} = mlb.getPerson()
-    * /people/{personId}/stats/game/{gamePk} - mlbStats.getPersonStats()
- * /jobs - mlbStats.getJobs()
-    * /jobs/umpires - mlbStats.getJobsUmpires()
-    * /jobs/umpires/games/{umpireId} = mlbStats.getJobsUmpiresGames()
-    * /jobs/datacasters - mlbStats.getJobsDatacasters()
-    * /jobs/officialScorers - mlbStats.getJobsOfficialScorers()
- * /schedule - mlbStats.getSchedule() 
-    * /schedule/games/tied - mlbstats.getScheduleTied() 
-    * /schedule/postseason - mlbStats.getSchedulePostseason()
-    * /schedule/postseason/series - mlbStats.getSchedulePostseasonSeries()
-    * /schedule/postseason/tuneIn - mlbStats.getSchedulePostseasonTuneIn()
- * /seasons{all} - mlbStats.getSeasons()
-    * /seasons/{seasonId} - mlbStats.getSeason()
- * /sports - mlbStats.getSports()
- * /sports/{sportId}/player - mlbStats.getSportsPlayers()
- * /standings - mlbStats.getStandings()
- * /stats - mlbStats.getStats()
-    * /stats/leaders - mlbStats.getStatsLeaders()
-    * /stats/streaks - mlbStats.getStatsStreaks()
- * /teams - mlbStats.getTeams()
-    * /teams/history - mlbStats.getTeamsHistory()
-    * /teams/stats - mlbStats.getTeamsStats()
-    * /teams/affiliates - mlbStats.getTeamsAffiliates()
-    * /teams/{teamId} - mlbStats.getTeam()
-    * /teams/{teamId}/alumni - mlbStats.getTeamAlumni()
-    * /teams/{teamId}/coaches - mlbStats.getTeamCoaches()
-    * /teams/{teamId}/personnel - mlbStats.getTeamPersonnel()
-    * /teams/{teamId}/leaders - mlbStats.getTeamLeaders()
-    * /teams/{teamId}/roster - mlbStats.getTeamRoster()
- * /venues - mlbStats.getVenues()
-    * /venues/{venueId} - mlbStats.getVenue()
+### Players
+```javascript
+// Get people/players
+await mlbStats.getPeople({ params: { personIds: '660271' } });
+
+// Get specific person
+await mlbStats.getPerson({ pathParams: { personId: 660271 } });
+
+// Get player stats for specific game
+await mlbStats.getPersonStats({ 
+    pathParams: { 
+        personId: 660271, 
+        gamePk: 634197 
+    } 
+});
+```
+
+### Standings
+```javascript
+// Get current standings
+await mlbStats.getStandings({ params: { leagueId: 103 } });
+
+// Get standings for specific date
+await mlbStats.getStandings({ 
+    params: { 
+        leagueId: 103, 
+        date: '2024-07-01' 
+    } 
+});
+```
+
+### Stats
+```javascript
+// Get stat leaders
+await mlbStats.getStatsLeaders({ 
+    params: { 
+        leaderCategories: 'homeRuns',
+        season: 2024 
+    } 
+});
+
+// Get stats
+await mlbStats.getStats({ 
+    params: { 
+        stats: 'season',
+        group: 'hitting',
+        season: 2024 
+    } 
+});
+```
+
+## Response Format
+
+All API responses follow this structure:
+
+```typescript
+interface APIResponse {
+    status: number;          // HTTP status code
+    statusText: string;      // HTTP status message
+    headers: object;         // Response headers
+    data: any;              // Parsed JSON response data
+    json(): Promise<any>;   // Method to get JSON data
+    text(): Promise<string>; // Method to get raw text
+}
+```
+
+### Example Response Handling
+
+```javascript
+const response = await mlbStats.getTeams({ params: { sportId: 1 } });
+
+console.log('Status:', response.status);           // 200
+console.log('Teams:', response.data.teams);        // Array of team objects
+console.log('Headers:', response.headers);         // Response headers
+
+// Alternative ways to access data
+const jsonData = await response.json();            // Same as response.data
+const rawText = await response.text();             // Raw response text
+```
+
+## Error Handling
+
+The library throws errors for failed requests that you should handle:
+
+```javascript
+try {
+    const response = await mlbStats.getGameFeed({ 
+        pathParams: { gamePk: 'invalid-id' } 
+    });
+    console.log(response.data);
+} catch (error) {
+    console.error('Request failed:', error.message);
+    
+    if (error.response) {
+        console.error('Status:', error.response.status);
+        console.error('Data:', error.response.data);
+    }
+}
+```
+
+## Development
+
+### Running Tests
+
+```bash
+# Run all tests
+npm test
+
+# Run tests with coverage
+npm run test:coverage
+
+# Run tests in watch mode
+npm run test:watch
+```
+
+### Linting
+
+```bash
+# Check code style
+npm run lint
+
+# Fix code style issues
+npm run lint:fix
+```
+
+## TypeScript Support
+
+This package includes comprehensive TypeScript definitions. Import types as needed:
+
+```typescript
+import type { 
+    TeamsResponse, 
+    GameFeedResponse, 
+    ScheduleResponse,
+    Team,
+    Game,
+    Player 
+} from 'mlb-stats-api/types';
+```
+
+## API Documentation
+
+For detailed information about available parameters and response formats, see the [Official MLB Stats API Documentation](https://statsapi.mlb.com/docs/).
+
+## License
+
+MIT
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.

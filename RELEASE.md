@@ -1,5 +1,10 @@
 # Release Notes
 
+## v2.0.0
+Date: 2025-06-20
+What's In this release?
+This is a total revamp, modernizing the package, adding support for types, documentationm and attempting to include missing API endpoints, and with revamped passing tests.
+
 ## v1.0.8
 Date: 2019-07-16
 What's In this release?

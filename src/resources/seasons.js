@@ -1,14 +1,16 @@
 'use strict';
+const HttpClient = require('../httpClient');
 
 class Seasons {
-    getSeasons(args = { pathParams: '' }) {
-        const { params, pathParams: { all = '' } } = args;
-        return fetch(`${this.apiHost}seasons/${all}`, { params: params });
+    getSeasons(args = {}) {
+        const { params } = args;
+        const endpoint = params && params.all ? 'seasons/all' : 'seasons';
+        return HttpClient.request(`${this.apiHost}${endpoint}`, { params: params });
     }
 
     getSeason(args = { pathParams: '' }) {
         const { params, pathParams: { seasonId = '' } } = args;
-        return fetch(`${this.apiHost}seasons/${seasonId}`, { params: params });
+        return HttpClient.request(`${this.apiHost}seasons/${seasonId}`, { params: params });
     }
 }
 

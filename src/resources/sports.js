@@ -1,14 +1,15 @@
 'use strict';
+const HttpClient = require('../httpClient');
 
 class Sports {
     getSports(args = {}) {
         const { params } = args;
-        return fetch(`${this.apiHost}sports`, { params: params });
+        return HttpClient.request(`${this.apiHost}sports`, { params: params });
     }
 
     getSportsPlayers(args = { pathParams: '' }) {
         const { params, pathParams: { sportId = '' } } = args;
-        return fetch(`${this.apiHost}sports/${sportId}/players`, { params: params });
+        return HttpClient.request(`${this.apiHost}sports/${sportId}/players`, { params: params });
     }
 }
 

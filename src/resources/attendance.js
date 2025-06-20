@@ -1,9 +1,10 @@
 'use strict';
+const HttpClient = require('../httpClient');
 
 class Attendance {
     getAttendance(args = {}) {
         const { params } = args;
-        return fetch(`${this.apiHost}attendance`, { params: params });
+        return HttpClient.request(`${this.apiHost}attendance`, { params: params });
     }
 }
 

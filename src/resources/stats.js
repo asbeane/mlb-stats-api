@@ -1,19 +1,20 @@
 'use strict';
+const HttpClient = require('../httpClient');
 
 class Stats {
     getStats(args = {}) {
         const { params } = args;
-        return fetch(`${this.apiHost}stats`, { params: params });
+        return HttpClient.request(`${this.apiHost}stats`, { params: params });
     }
 
     getStatsLeaders(args = {}) {
         const { params } = args;
-        return fetch(`${this.apiHost}stats/leaders`, { params: params });
+        return HttpClient.request(`${this.apiHost}stats/leaders`, { params: params });
     }
 
     getStatsStreaks(args = {}) {
         const { params } = args;
-        return fetch(`${this.apiHost}stats/streaks`, { params: params });
+        return HttpClient.request(`${this.apiHost}stats/streaks`, { params: params });
     }
 }
 

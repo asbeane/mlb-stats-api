@@ -1,9 +1,10 @@
 'use strict';
+const HttpClient = require('../httpClient');
 
 class HighLow { 
     getHighLow(args = { pathParams: '' }) {
         const { params, pathParams: { orgType = '' } } = args;
-        return fetch(`${this.apiHost}highLow/${orgType}`, { params: params });
+        return HttpClient.request(`${this.apiHost}highLow/${orgType}`, { params: params });
     }
 }
 

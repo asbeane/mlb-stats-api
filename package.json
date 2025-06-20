@@ -3,8 +3,13 @@
   "version": "1.11.0",
   "description": "Node JS Library for consuming MLB's official stats API",
   "main": "index.js",
+  "types": "index.d.ts",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha test/*.test.js",
+    "test:watch": "mocha test/*.test.js --watch",
+    "test:coverage": "nyc mocha test/*.test.js",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "repository": {
     "type": "git",
@@ -14,16 +19,30 @@
     "node",
     "nodejs",
     "mlb",
-    "mlb-stats-api"
+    "mlb-stats-api",
+    "baseball",
+    "sports",
+    "api",
+    "typescript"
   ],
   "author": "Andy Beane",
   "license": "MIT",
+  "files": [
+    "index.js",
+    "index.d.ts",
+    "src/",
+    "types/"
+  ],
   "dependencies": {},
   "devDependencies": {
+    "@types/node": "^20.10.5",
+    "eslint": "^8.56.0",
     "mocha": "^10.2.0",
-    "should": "^13.2.3"
+    "nyc": "^15.1.0",
+    "should": "^13.2.3",
+    "typescript": "^5.3.3"
   },
   "engines": {
-    "node": "^18.x"
+    "node": ">=18.0.0"
   }
 }
