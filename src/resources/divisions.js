@@ -1,9 +1,10 @@
 'use strict';
+const HttpClient = require('../httpClient');
 
 class Divisions {
     getDivisions(args = {}) {
         const { params } = args;
-        return fetch(`${this.apiHost}divisions`, { params: params });
+        return HttpClient.request(`${this.apiHost}divisions`, { params: params });
     }
 }
 
